@@ -66,7 +66,7 @@ keyway pull
 
 🟡 **Alpha** — Keyway is in active development. Data loss may occur during this phase.
 
-Free for solo developers. No credit card required.
+Free for public repos. No credit card required.
 
 ---
 
