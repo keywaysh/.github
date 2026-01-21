@@ -1,109 +1,89 @@
 <div align="center">
   <h1>Keyway</h1>
-  <p><strong>GitHub-native secrets management for dev teams</strong></p>
-  <p>If you have repo access, you have secret access. It's that simple.</p>
+  <p><strong>Stop sharing .env files in Slack.</strong></p>
+  <p>3 commands. Your whole team has the secrets.</p>
 
   <p>
-    <a href="https://www.npmjs.com/package/@keywaysh/cli"><img src="https://img.shields.io/npm/v/@keywaysh/cli?color=blue&label=CLI" alt="npm version" /></a>
-    <a href="https://keyway.sh"><img src="https://img.shields.io/badge/status-beta-yellow" alt="Status: Beta" /></a>
-    <a href="https://docs.keyway.sh"><img src="https://img.shields.io/badge/docs-docs.keyway.sh-blue" alt="Documentation" /></a>
-  </p>
-
-  <p>
+    <a href="https://docs.keyway.sh">Docs</a> ·
     <a href="https://keyway.sh">Website</a> ·
-    <a href="https://docs.keyway.sh">Documentation</a> ·
-    <a href="https://www.npmjs.com/package/@keywaysh/cli">NPM</a>
+    <a href="https://app.keyway.sh">Dashboard</a> ·
+    <a href="https://github.com/keywaysh/cli">CLI</a>
   </p>
 </div>
 
 ---
 
-## The Problem
-
-Every team deals with this:
-
-- "Can you send me the .env file?"
-- "Which version is the right one?"
-- Hours wasted onboarding new developers
-- Nobody knows which secrets are up to date
-
-## The Solution
-
 ```bash
-npm install -g @keywaysh/cli
-keyway pull
-```
-
-If you have access to the GitHub repo, you have access to its secrets. No invites, no separate accounts.
-
-## How It Works
-
-```
-┌─────────────┐     push      ┌─────────────┐     pull      ┌─────────────┐
-│  Your .env  │ ────────────► │   Keyway    │ ◄──────────── │  Teammate   │
-│   file      │               │   (AES-256) │               │   machine   │
-└─────────────┘               └─────────────┘               └─────────────┘
-                                     │
-                                     ▼
-                              GitHub API
-                           (access control)
-```
-
-1. **GitHub-native access** — Repo access = secret access
-2. **Zero config** — Keep using `.env` files
-3. **Encrypted at rest** — AES-256-GCM encryption
-
-## Quick Start
-
-```bash
-# Install the CLI
-npm install -g @keywaysh/cli
-
-# Authenticate with GitHub
+brew install keywaysh/tap/keyway
 keyway login
-
-# Initialize your project (from a Git repo)
-keyway init
-
-# Push your local secrets
 keyway push
-
-# New teammate joins? They just run:
-keyway pull
 ```
 
-## Features
+Your teammate runs `keyway pull`. Done.
 
-| Feature | Description |
-|---------|-------------|
-| **Environments** | Separate secrets for `development`, `staging`, `production` |
-| **Auto-detect** | Automatically detects your Git repo |
-| **Dashboard** | Web UI to manage secrets and team access |
-| **Audit log** | Track who accessed what and when |
-| **CLI-first** | Designed for developers who live in the terminal |
+---
 
-## Open Source
+## Before Keyway
 
-| Repository | Description |
-|------------|-------------|
-| [@keywaysh/cli](https://github.com/keywaysh/cli) | Command-line interface |
-| [keyway-docs](https://github.com/keywaysh/keyway-docs) | Documentation (Docusaurus) |
+1. Find the .env in Slack / Notion / 1Password
+2. Copy-paste, hope it's the right one
+3. New dev joins → repeat for each project
+4. Dev leaves → hope they deleted everything
 
-## Status
+## With Keyway
 
-**Beta** — Keyway is production-ready but still evolving. Breaking changes may occur.
+```bash
+keyway run -- npm start
+```
 
-- Free for unlimited public repositories
-- 1 private repository on free plan
-- No credit card required
+No .env file. Secrets injected at runtime.
+
+---
+
+## Why Keyway?
+
+- **3 commands** — Install, push, run. That's it.
+- **Zero onboarding** — New dev? `keyway pull`. Dev leaves? Revoke repo access, done.
+- **AI-safe** — Secrets never in files, never in AI context.
+- **Deploy sync** — Push to Vercel, Netlify, Railway with `keyway sync`.
+
+## AI-Safe Secrets
+
+Secrets should never end up in your AI context. Keyway keeps them out.
+
+```bash
+# Inject secrets at runtime, never in files
+keyway run -- npm start
+
+# MCP server for AI assistants (Claude, Cursor, etc.)
+keyway mcp
+```
+
+With `keyway run`, secrets are injected as environment variables at runtime — they never touch disk. The MCP server lets AI assistants help you manage secrets safely, without exposing values in the conversation.
+
+## Integrations
+
+Sync secrets to Vercel, Netlify, Railway — one command.
+
+```bash
+keyway sync vercel
+```
+
+## Repositories
+
+| Repo | Description |
+|------|-------------|
+| [cli](https://github.com/keywaysh/cli) | Go CLI (Homebrew, npm) |
+| [keyway-backend](https://github.com/keywaysh/keyway-backend) | Fastify API |
+| [keyway-crypto](https://github.com/keywaysh/keyway-crypto) | Go gRPC encryption service (open-sourcing soon) |
+| [keyway-action](https://github.com/keywaysh/keyway-action) | GitHub Action |
+| [keyway-mcp](https://github.com/keywaysh/keyway-mcp) | MCP server for AI assistants |
+| [keyway-docs](https://github.com/keywaysh/keyway-docs) | Documentation |
 
 ---
 
 <div align="center">
-  <p>
-    <a href="https://keyway.sh"><strong>Get Started →</strong></a>
-  </p>
-  <p>
-    <sub>Built by <a href="https://github.com/NicolasRitouet">@NicolasRitouet</a></sub>
-  </p>
+  <a href="https://docs.keyway.sh"><strong>Get Started →</strong></a>
+  <br><br>
+  <sub>Built by <a href="https://github.com/NicolasRitouet">@NicolasRitouet</a></sub>
 </div>
