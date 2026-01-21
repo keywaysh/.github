@@ -1,5 +1,4 @@
 <div align="center">
-  <img src="https://keyway.sh/logo.svg" alt="Keyway" width="80" />
   <h1>Keyway</h1>
   <p><strong>GitHub-native secrets management for dev teams</strong></p>
   <p>If you have repo access, you have secret access. It's that simple.</p>
