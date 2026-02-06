@@ -14,10 +14,11 @@
 
 ```bash
 brew install keywaysh/tap/keyway
-keyway init     # Create vault, push secrets
+keyway init                  # Create vault, push secrets
+keyway run -- npm start      # Run with secrets injected, nothing on disk
 ```
 
-A teammate clones the repo and runs `keyway pull`. Done in 30 seconds.
+A teammate clones the repo and runs `keyway run -- npm start`. Done in 30 seconds. No `.env` on disk.
 
 ---
 
