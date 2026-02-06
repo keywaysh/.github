@@ -1,7 +1,6 @@
 <div align="center">
   <h1>Keyway</h1>
-  <p><strong>Stop sharing .env files in Slack.</strong></p>
-  <p>3 commands. Your whole team has the secrets.</p>
+  <p><strong>GitHub-native secrets management.</strong> Repo access = secret access.</p>
 
   <p>
     <a href="https://docs.keyway.sh">Docs</a> ·
@@ -15,70 +14,48 @@
 
 ```bash
 brew install keywaysh/tap/keyway
-keyway login
-keyway push
+keyway init     # Create vault, push secrets
 ```
 
-Your teammate runs `keyway pull`. Done.
-
----
-
-## Before Keyway
-
-1. Find the .env in Slack / Notion / 1Password
-2. Copy-paste, hope it's the right one
-3. New dev joins → repeat for each project
-4. Dev leaves → hope they deleted everything
-
-## With Keyway
-
-```bash
-keyway run -- npm start
-```
-
-No .env file. Secrets injected at runtime.
+A teammate clones the repo and runs `keyway pull`. Done in 30 seconds.
 
 ---
 
 ## Why Keyway?
 
-- **3 commands** — Install, push, run. That's it.
-- **Zero onboarding** — New dev? `keyway pull`. Dev leaves? Revoke repo access, done.
-- **AI-safe** — Secrets never in files, never in AI context.
+- **GitHub-native** — If you have repo access, you have secret access. No new accounts, no invites.
+- **Zero-trust mode** — `keyway run -- npm start` injects secrets at runtime. Nothing on disk.
+- **AI-safe** — Secrets never in `.env` files, never in AI context. MCP server for assistants that need to manage secrets without seeing them.
 - **Deploy sync** — Push to Vercel, Netlify, Railway with `keyway sync`.
+- **Fully open-source** — MIT licensed, self-hostable, auditable.
 
-## AI-Safe Secrets
+---
 
-Secrets should never end up in your AI context. Keyway keeps them out.
+## Works with AI Assistants
 
-```bash
-# Inject secrets at runtime, never in files
-keyway run -- npm start
-
-# MCP server for AI assistants (Claude, Cursor, etc.)
-keyway mcp
-```
-
-With `keyway run`, secrets are injected as environment variables at runtime — they never touch disk. The MCP server lets AI assistants help you manage secrets safely, without exposing values in the conversation.
-
-## Integrations
-
-Sync secrets to Vercel, Netlify, Railway — one command.
+AI coding agents can read your `.env` files. Keyway keeps secrets out of AI context.
 
 ```bash
-keyway sync vercel
+keyway run -- npm start                        # Secrets in RAM only
+claude mcp add keyway -- npx @keywaysh/mcp     # MCP server for AI assistants
 ```
+
+[Learn more →](https://docs.keyway.sh/ai-agents)
+
+---
 
 ## Repositories
 
 | Repo | Description |
 |------|-------------|
-| [cli](https://github.com/keywaysh/cli) | Go CLI (Homebrew, npm) |
-| [keyway-backend](https://github.com/keywaysh/keyway-backend) | Fastify API |
-| [keyway-crypto](https://github.com/keywaysh/keyway-crypto) | Go gRPC encryption service (open-sourcing soon) |
-| [keyway-action](https://github.com/keywaysh/keyway-action) | GitHub Action |
+| [cli](https://github.com/keywaysh/cli) | Go CLI (Homebrew, npm, curl) |
+| [keyway-backend](https://github.com/keywaysh/keyway-backend) | Fastify 5 API server |
+| [keyway-crypto](https://github.com/keywaysh/keyway-crypto) | Go gRPC encryption microservice |
 | [keyway-mcp](https://github.com/keywaysh/keyway-mcp) | MCP server for AI assistants |
-| [keyway-docs](https://github.com/keywaysh/keyway-docs) | Documentation |
+| [keyway-action](https://github.com/keywaysh/keyway-action) | GitHub Action for CI/CD |
+| [keyway-dashboard](https://github.com/keywaysh/keyway-dashboard) | Next.js web dashboard |
+| [keyway-landing](https://github.com/keywaysh/keyway-landing) | Marketing site |
+| [keyway-docs](https://github.com/keywaysh/keyway-docs) | Documentation (Docusaurus) |
 
 ---
 
